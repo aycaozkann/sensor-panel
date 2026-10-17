@@ -1,16 +1,70 @@
-# React + Vite
+# Akıllı Sensör ve Cihaz Yönetim Arayüzü
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Endüstriyel sensörleri (örn. I2C haberleşmeli SHT35 sıcaklık/nem sensörü, ESP32 modülleri) takip etmek için geliştirilmiş bir donanım envanter paneli. TNC Group web geliştirme eğitimi kapsamında hazırlanmıştır. Backend yoktur, veriler tarayıcının LocalStorage alanında saklanır.
 
-Currently, two official plugins are available:
+## Özellikler
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Ekle:** Form ile yeni sensör ekleme (ad, tip, protokol, lokasyon, durum)
+- **Listele:** Kayıtlı sensörleri kart yapısında görüntüleme
+- **Güncelle:** Sensörün durumunu (Aktif / Bakımda / Arızalı) değiştirme
+- **Sil:** Onay alarak sensörü silme
+- **Özet sayaçlar:** Toplam / Aktif / Bakımda / Arızalı sayıları
+- **Kalıcı veri:** Sayfa yenilense de kayıtlar korunur
+- Koyu endüstriyel tema, durum renkleri: Aktif = yeşil, Bakımda = sarı, Arızalı = kırmızı
 
-## React Compiler
+## Kullanılan Teknolojiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React](https://react.dev/) (JavaScript)
+- [Vite](https://vite.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/) (`@tailwindcss/vite` eklentisi)
+- LocalStorage (veri saklama)
 
-## Expanding the Oxlint configuration
+## Kurulum
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Node.js yüklü olmalıdır.
+
+```bash
+# 1. Bağımlılıkları yükle
+npm install
+
+# 2. Geliştirme sunucusunu başlat
+npm run dev
+
+# 3. (İsteğe bağlı) Yayın için derle
+npm run build
+```
+
+Geliştirme sunucusu varsayılan olarak http://localhost:5173 adresinde açılır.
+
+## Klasör Yapısı
+
+```
+src/
+├── components/   SensorForm, SensorList, SensorCard, SummaryCards
+├── pages/        Dashboard
+├── interfaces/   sensor.js (veri modeli, durum ve protokol listeleri)
+└── hooks/        useLocalStorage.js
+```
+
+## Veri Modeli
+
+| Alan | Açıklama |
+| --- | --- |
+| `id` | Benzersiz kimlik |
+| `ad` | Sensör adı |
+| `tip` | Tip / model (örn. SHT35) |
+| `protokol` | I2C, UART, SPI, WiFi, Bluetooth, Modbus |
+| `lokasyon` | Sensörün bulunduğu yer |
+| `durum` | Aktif / Bakımda / Arızalı |
+| `eklenmeTarihi` | Eklenme zamanı (ISO biçiminde) |
+
+## Ekran Görüntüsü
+
+<!-- Ekran görüntüsünü docs/ekran-goruntusu.png olarak kaydedip aşağıdaki satırı açın -->
+<!-- ![Panel ekran görüntüsü](docs/ekran-goruntusu.png) -->
+
+_Ekran görüntüsü buraya eklenecek._
+
+## Notlar
+
+Geliştirmede Claude Code'dan yardım alındı.

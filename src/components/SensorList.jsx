@@ -1,7 +1,7 @@
 import SensorCard from './SensorCard'
 
 // Sensör dizisini alır, her biri için bir kart çizer.
-function SensorList({ sensorler }) {
+function SensorList({ sensorler, onDurumDegistir, onSil }) {
   // Hiç kayıt yoksa kullanıcıya ne yapacağını söyleyen bir mesaj göster
   if (sensorler.length === 0) {
     return (
@@ -14,7 +14,12 @@ function SensorList({ sensorler }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {sensorler.map((sensor) => (
-        <SensorCard key={sensor.id} sensor={sensor} />
+        <SensorCard
+          key={sensor.id}
+          sensor={sensor}
+          onDurumDegistir={onDurumDegistir}
+          onSil={onSil}
+        />
       ))}
     </div>
   )

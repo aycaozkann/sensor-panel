@@ -12,6 +12,21 @@ function Dashboard() {
     setSensorler([...sensorler, sensorOlustur(formVerisi)])
   }
 
+  // Verilen id'ye sahip sensörün durumunu değiştirir, diğerlerine dokunmaz
+  function durumGuncelle(id, yeniDurum) {
+    setSensorler(
+      sensorler.map((s) => (s.id === id ? { ...s, durum: yeniDurum } : s))
+    )
+  }
+
+  // Kullanıcıdan onay alır; "Tamam" derse sensörü listeden çıkarır
+  function sensorSil(id) {
+    const sensor = sensorler.find((s) => s.id === id)
+    if (window.confirm(`"${sensor.ad}" sensörü silinsin mi?`)) {
+      setSensorler(sensorler.filter((s) => s.id !== id))
+    }
+  }
+
   return (
     <div className="mx-auto max-w-5xl p-6 space-y-6">
       <header>
@@ -25,7 +40,11 @@ function Dashboard() {
 
       <SensorForm onEkle={sensorEkle} />
 
-      <SensorList sensorler={sensorler} />
+      <SensorList
+        sensorler={sensorler}
+        onDurumDegistir={durumGuncelle}
+        onSil={sensorSil}
+      />
     </div>
   )
 }

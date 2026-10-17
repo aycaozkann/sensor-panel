@@ -1,6 +1,7 @@
 import useLocalStorage from '../hooks/useLocalStorage'
 import { sensorOlustur } from '../interfaces/sensor'
 import SensorForm from '../components/SensorForm'
+import SensorList from '../components/SensorList'
 
 function Dashboard() {
   // Tüm sensörler burada tutulur ve LocalStorage'a otomatik kaydedilir
@@ -24,10 +25,7 @@ function Dashboard() {
 
       <SensorForm onEkle={sensorEkle} />
 
-      {/* Geçici: kartlar 4. adımda gelecek */}
-      <p className="text-sm text-slate-400">
-        Kayıtlı sensör sayısı: {sensorler.length}
-      </p>
+      <SensorList sensorler={sensorler} />
     </div>
   )
 }

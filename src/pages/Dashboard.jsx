@@ -2,6 +2,7 @@ import useLocalStorage from '../hooks/useLocalStorage'
 import { sensorOlustur } from '../interfaces/sensor'
 import SensorForm from '../components/SensorForm'
 import SensorList from '../components/SensorList'
+import SummaryCards from '../components/SummaryCards'
 
 function Dashboard() {
   // Tüm sensörler burada tutulur ve LocalStorage'a otomatik kaydedilir
@@ -29,7 +30,7 @@ function Dashboard() {
 
   return (
     <div className="mx-auto max-w-5xl p-6 space-y-6">
-      <header>
+      <header className="border-b border-slate-700 pb-4">
         <h1 className="text-2xl font-bold text-cyan-400">
           Akıllı Sensör ve Cihaz Yönetim Arayüzü
         </h1>
@@ -38,7 +39,11 @@ function Dashboard() {
         </p>
       </header>
 
+      <SummaryCards sensorler={sensorler} />
+
       <SensorForm onEkle={sensorEkle} />
+
+      <h2 className="text-lg font-semibold text-slate-200">Sensörler</h2>
 
       <SensorList
         sensorler={sensorler}

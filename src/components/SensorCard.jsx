@@ -15,7 +15,7 @@ function SensorCard({ sensor, onDurumDegistir, onSil }) {
   const tarih = new Date(sensor.eklenmeTarihi).toLocaleDateString('tr-TR')
 
   return (
-    <div className="rounded-lg border border-slate-700 bg-slate-800 p-4 space-y-3">
+    <div className="rounded-lg border border-slate-700 bg-slate-800 p-4 space-y-3 transition-colors hover:border-cyan-500/50">
       <div className="flex items-start justify-between gap-2">
         <h3 className="font-semibold text-slate-100">{sensor.ad}</h3>
         <span

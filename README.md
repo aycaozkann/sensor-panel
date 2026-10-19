@@ -1,70 +1,37 @@
-# Akıllı Sensör ve Cihaz Yönetim Arayüzü
+# Akıllı Sensör ve Cihaz Yönetim Paneli
 
-Endüstriyel sensörleri (örn. I2C haberleşmeli SHT35 sıcaklık/nem sensörü, ESP32 modülleri) takip etmek için geliştirilmiş bir donanım envanter paneli. TNC Group web geliştirme eğitimi kapsamında hazırlanmıştır. Backend yoktur, veriler tarayıcının LocalStorage alanında saklanır.
+TNC Group Web Geliştirme Eğitimi kapsamında geliştirdiğim bu proje, endüstriyel sahada kullanılan sensörlerin (SHT35 sıcaklık/nem sensörü, ESP32 modülleri vb.) envanter ve durum takibini yapmak için tasarlanmış bir web uygulamasıdır. 
 
-## Özellikler
+Veriler tarayıcı hafızasında (`LocalStorage`) tutulduğu için sayfa yenilense bile kaybolmaz ve harici bir sunucuya ihtiyaç duymaz.
 
-- **Ekle:** Form ile yeni sensör ekleme (ad, tip, protokol, lokasyon, durum)
-- **Listele:** Kayıtlı sensörleri kart yapısında görüntüleme
-- **Güncelle:** Sensörün durumunu (Aktif / Bakımda / Arızalı) değiştirme
-- **Sil:** Onay alarak sensörü silme
-- **Özet sayaçlar:** Toplam / Aktif / Bakımda / Arızalı sayıları
-- **Kalıcı veri:** Sayfa yenilense de kayıtlar korunur
-- Koyu endüstriyel tema, durum renkleri: Aktif = yeşil, Bakımda = sarı, Arızalı = kırmızı
+## Canlı Demo ve Ekran Görüntüsü
 
-## Kullanılan Teknolojiler
+Projeyi canlı olarak incelemek için: **[Canlı Demo Linki (Netlify linkini buraya yapıştır)]**
 
-- [React](https://react.dev/) (JavaScript)
-- [Vite](https://vite.dev/)
-- [Tailwind CSS v4](https://tailwindcss.com/) (`@tailwindcss/vite` eklentisi)
-- LocalStorage (veri saklama)
+<img width="516" height="539" alt="sensor-panel" src="https://github.com/user-attachments/assets/8a6f702f-60b7-46de-ab55-802c39cb942c" />
 
-## Kurulum
 
-Node.js yüklü olmalıdır.
+## Neler Yapılabiliyor? (CRUD İşlemleri)
 
-```bash
-# 1. Bağımlılıkları yükle
-npm install
+- **Cihaz Ekleme:** Sensör adı, modeli, haberleşme protokolü (I2C, UART, SPI vb.), bulunduğu konum ve güncel durumu girilerek envantere yeni kayıt eklenebilir.
+- **Listeleme ve Özet:** Kayıtlı tüm cihazlar kartlar halinde listelenir. Üst kısımdaki özet panelinden toplam, aktif, bakımda veya arızalı cihaz sayıları anlık takip edilebilir.
+- **Durum Güncelleme:** Sahadaki duruma göre sensörlerin statüsü *Aktif (Yeşil)*, *Bakımda (Sarı)* veya *Arızalı (Kırmızı)* olarak tek tıkla değiştirilebilir.
+- **Kayıt Silme:** Envanterden çıkarılan cihazlar onay alınarak listeden silinebilir.
 
-# 2. Geliştirme sunucusunu başlat
-npm run dev
+## Kullanılan Teknolojiler ve Mimari
 
-# 3. (İsteğe bağlı) Yayın için derle
-npm run build
-```
+Projeyi geliştirirken modern frontend araçlarını kullandım:
+- **React (Vite)** - Hızlı ve bileşen (component) tabanlı arayüz geliştirme
+- **Tailwind CSS** - Endüstriyel koyu tema ve responsive (mobil uyumlu) tasarım
+- **LocalStorage API** - Verilerin tarayıcıda kalıcı olarak saklanması
 
-Geliştirme sunucusu varsayılan olarak http://localhost:5173 adresinde açılır.
+### Klasör Yapısı
 
-## Klasör Yapısı
+Yönergeye uygun olarak projeyi modüler bir yapıda kurguladım:
 
-```
+```text
 src/
-├── components/   SensorForm, SensorList, SensorCard, SummaryCards
-├── pages/        Dashboard
-├── interfaces/   sensor.js (veri modeli, durum ve protokol listeleri)
-└── hooks/        useLocalStorage.js
-```
-
-## Veri Modeli
-
-| Alan | Açıklama |
-| --- | --- |
-| `id` | Benzersiz kimlik |
-| `ad` | Sensör adı |
-| `tip` | Tip / model (örn. SHT35) |
-| `protokol` | I2C, UART, SPI, WiFi, Bluetooth, Modbus |
-| `lokasyon` | Sensörün bulunduğu yer |
-| `durum` | Aktif / Bakımda / Arızalı |
-| `eklenmeTarihi` | Eklenme zamanı (ISO biçiminde) |
-
-## Ekran Görüntüsü
-
-<!-- Ekran görüntüsünü docs/ekran-goruntusu.png olarak kaydedip aşağıdaki satırı açın -->
-<!-- ![Panel ekran görüntüsü](docs/ekran-goruntusu.png) -->
-
-_Ekran görüntüsü buraya eklenecek._
-
-## Notlar
-
-Geliştirmede Claude Code'dan yardım alındı.
+├── components/   # SensorForm, SensorList, SensorCard, SummaryCards bileşenleri
+├── pages/        # Ana ekranı oluşturan Dashboard sayfası
+├── interfaces/   # Veri modeli, protokol ve durum sabitleri (sensor.js)
+└── hooks/        # LocalStorage yönetimi için özel hook (useLocalStorage.js)

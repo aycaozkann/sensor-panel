@@ -1,6 +1,6 @@
 # Akıllı Sensör ve Cihaz Yönetim Paneli
 
-TNC Group Web Geliştirme Eğitimi kapsamında geliştirdiğim bu proje, endüstriyel sahada kullanılan sensörlerin (SHT35 sıcaklık/nem sensörü, ESP32 modülleri vb.) envanter ve durum takibini yapmak için tasarlanmış bir web uygulamasıdır. 
+Endüstriyel sahada kullanılan sensörlerin (SHT35 sıcaklık/nem sensörü, ESP32 modülleri vb.) envanter ve durum takibini yapmak için tasarlanmış bir web uygulamasıdır. 
 
 Veriler tarayıcı hafızasında (`LocalStorage`) tutulduğu için sayfa yenilense bile kaybolmaz ve harici bir sunucuya ihtiyaç duymaz.
 

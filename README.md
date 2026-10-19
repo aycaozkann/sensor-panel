@@ -6,7 +6,7 @@ Veriler tarayıcı hafızasında (`LocalStorage`) tutulduğu için sayfa yenilen
 
 ## Canlı Demo ve Ekran Görüntüsü
 
-Projeyi canlı olarak incelemek için: **[Canlı Demo Linki (Netlify linkini buraya yapıştır)]**
+Projeyi canlı olarak incelemek için: (https://sensor-panel.netlify.app)
 
 <img width="516" height="539" alt="sensor-panel" src="https://github.com/user-attachments/assets/8a6f702f-60b7-46de-ab55-802c39cb942c" />
 
